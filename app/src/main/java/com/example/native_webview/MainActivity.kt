@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Bitmap
-import android.media.MediaPlayer
 import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.os.Message
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +30,14 @@ class MainActivity : AppCompatActivity() {
 
         webView = findViewById(R.id.webView1)
         mProgressBar = findViewById(R.id.progress1)
+
+        // 잠금화면 점유
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+        )
+
 
         webView.apply {
             webViewClient = WebViewClientClass() // new WebViewClient()); //클릭시 새창 안뜨게
@@ -104,20 +112,20 @@ class MainActivity : AppCompatActivity() {
         webView.loadUrl(url)
 
         // 앞 뒤로가기 버튼추가
-        previos_btn.setOnClickListener {
-            val canGoBack: Boolean = webView.canGoBack()
-            if (canGoBack) {
-                webView.goBack()
-            }
-        }
-
-
-        next_btn.setOnClickListener {
-            val canGoForward: Boolean = webView.canGoForward()
-            if (canGoForward) {
-                webView.goForward()
-            }
-        }
+//        previos_btn.setOnClickListener {
+//            val canGoBack: Boolean = webView.canGoBack()
+//            if (canGoBack) {
+//                webView.goBack()
+//            }
+//        }
+//
+//
+//        next_btn.setOnClickListener {
+//            val canGoForward: Boolean = webView.canGoForward()
+//            if (canGoForward) {
+//                webView.goForward()
+//            }
+//        }
 
 //
 //        //프로그레스 다이얼로그
